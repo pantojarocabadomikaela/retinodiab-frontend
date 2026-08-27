@@ -68,7 +68,7 @@ export class CreateUserComponent implements OnInit {
   ngOnInit(): void {
     this.registryForm = this.formBuilder.group({
       nombre: ['', [Validators.required, Validators.minLength(5)]],
-      email: ['', [Validators.required, Validators.minLength(4)]],
+      email: ['', [Validators.required, Validators.minLength(4), Validators.email]],
       password: ['', [Validators.required, Validators.minLength(4)]],
       rol: ['', [Validators.required]],
       diabetes: [false],
