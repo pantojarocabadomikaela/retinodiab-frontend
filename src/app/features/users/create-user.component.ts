@@ -91,7 +91,16 @@ export class CreateUserComponent implements OnInit {
         },
         error => {
           this.isSaving = false;
-          this.snackBarService.openSnackBar('Error al crear usuario: ' + (error?.error?.mensaje ?? error), () => {}, SnackBarType.error);
+          const emailError = error?.error?.email;
+          const backendMessage = (Array.isArray(emailError) ? emailError[0] : emailError)
+            ?? error?.error?.mensaje
+            ?? error?.error?.message
+            ?? error?.error?.detail
+            ?? error?.error?.error
+            ?? (typeof error?.error === 'string' ? error.error : undefined)
+            ?? error?.message
+            ?? 'Error inesperado';
+          this.snackBarService.openSnackBar('Error al crear usuario: ' + backendMessage, () => {}, SnackBarType.error);
         });
     }
   }
