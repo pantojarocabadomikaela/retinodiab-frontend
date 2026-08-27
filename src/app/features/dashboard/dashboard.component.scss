@@ -1,0 +1,94 @@
+// Dashboard (pantalla de inicio) con estilos del theme.
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    &__welcome {
+        &--title {
+            margin: 0;
+            font-family: var(--mdc-list-list-item-label-text-font);
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        &--subtitle {
+            margin: 0.25rem 0 0;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+    }
+
+    &__stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+
+    &__card {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1rem 1.25rem;
+        border-radius: 8px;
+        background-color: var(--secondary-contrast-light);
+        border: 1px solid var(--other-stroke);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+
+        &--icon {
+            color: var(--primary);
+        }
+
+        &--label {
+            margin: 0;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        &--value {
+            margin: 0;
+            font-family: var(--mdc-list-list-item-label-text-font);
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+        }
+    }
+
+    &__quick {
+        &--title {
+            margin: 0 0 0.75rem;
+            font-family: var(--mdc-list-list-item-label-text-font);
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-primary);
+        }
+
+        &--grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 0.75rem;
+        }
+
+        &--card {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            background-color: var(--primary-background);
+            border: 1px solid var(--other-stroke);
+            color: var(--primary);
+            font-family: var(--mdc-list-list-item-label-text-font);
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background-color 0.15s ease, border-color 0.15s ease;
+
+            &:hover {
+                background-color: var(--secondary-background);
+                border-color: var(--primary-border);
+            }
+        }
+    }
+}

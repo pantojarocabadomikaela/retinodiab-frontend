@@ -1,0 +1,146 @@
+:root {
+    --text-primary: #1C1C1C;
+    --text-secondary: #73677E;
+    --text-disabled: #9F9F9F;
+    --text-hint: #9F9F9F;
+
+    --field-background-focused: #F2F0F4;
+    --field-border: #C9BDD6;
+    --field-border-focused: #806C93;
+    --field-border-disabled: #B3B3B3;
+
+    --actions-main: #E8E2EE;
+    --actions-background: #EDE9F1;
+    --actions-disabled-background: #C9C2D2;
+    --actions-disabled-text: #FFFFFF;
+
+    --other-stroke: #C9BDD6;
+    --other-divider: #E8E2EE;
+    --other-backdrop: #808080;
+
+    --primary-background: #F3EEFA;
+    --primary-light: #A78BD0;
+    --primary-border: #8E6BB8;
+    --primary: #4D1F7A;
+    --primary-dark: #3B1660;
+    --primary-contrast-light: #FFFFFF;
+    --primary-contrast-dark: #1C1C1C;
+
+    --secondary-background: #EFE8F5;
+    --secondary-light: #B9A8CF;
+    --secondary-border: #8E6BB8;
+    --secondary-main: #806C93;
+    --secondary-dark: #66527A;
+    --secondary-contrast-light: #FFFFFF;
+    --secondary-contrast-dark: #FFFFFF;
+
+    --info-main: #2196F3;
+    --info-background: #E8F4FD;
+    --info-text-dark: #0D3C61;
+
+    --success-main: #4CAF50;
+    --success-background: #ECF6ED;
+    --success-text-dark: #1E4620;
+
+    --warning-main: #FF9800;
+    --warning-background: #FFF4E5;
+    --warning-text-dark: #663C00;
+
+    --error-main: #F42C2C;
+    --error-background: #FDEBEA;
+    --error-text-dark: #611A15;
+
+    /* NavBar: colores y tamaños derivados del theme (redefinibles por tema/densidad). */
+    --nav-background: var(--secondary-main);
+    --nav-foreground: var(--secondary-contrast-light);
+    --nav-border: var(--secondary-dark);
+    --nav-active-background: var(--nav-hover-background);
+    --nav-active-foreground: var(--nav-foreground);
+    --nav-active-hover-background: var(--nav-hover-background);
+    --nav-active-soft-background: var(--nav-hover-background);
+    --nav-active-soft-hover-background: var(--nav-hover-background);
+    --nav-hover-background: rgba(255, 255, 255, 0.12);
+    --nav-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    --nav-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --nav-font-weight: 500;
+    --nav-height: 36px;
+    --nav-item-height: 28px;
+    --nav-gap: 4px;
+    --nav-item-gap: 6px;
+    --nav-padding-x: 8px;
+    --nav-font-size: 11px;
+    --nav-icon-size: 14px;
+    --nav-radius: 4px;
+    --nav-chevron-size: 12px;
+    --nav-chevron-foreground: rgba(255, 255, 255, 0.6);
+
+    /* NavBar: panel desplegable de menús padre. */
+    --nav-menu-background: #FFFFFF;
+    --nav-menu-foreground: var(--text-primary);
+    --nav-menu-hover-background: var(--secondary-background);
+    --nav-menu-hover-foreground: var(--text-primary);
+    --nav-menu-active-background: var(--secondary-background);
+    --nav-menu-active-foreground: var(--text-primary);
+    --nav-menu-radius: 6px;
+    --nav-menu-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    --nav-menu-font-family: var(--nav-font-family);
+    --nav-menu-item-height: 26px;
+    --nav-menu-padding-x: 8px;
+    --nav-menu-font-size: var(--nav-font-size);
+    --nav-menu-icon-size: 14px;
+
+    /* ContextBar (breadcrumb): barra de estado bajo la NavBar, réplica de frontend_1. */
+    --ctx-background: #FFFFFF;
+    --ctx-border: var(--other-stroke);
+    --ctx-foreground: var(--text-primary);
+    --ctx-foreground-muted: var(--text-secondary);
+    --ctx-font-family: var(--nav-font-family);
+    --ctx-font-size: 12px;
+    --ctx-icon-size: 12px;
+    --ctx-gap: 8px;
+    --ctx-crumb-gap: 4px;
+    --ctx-padding-y: 8px;
+    --ctx-padding-x: 16px;
+
+    /* Tabla de Usuarios: réplica del look & feel del tab Productos (frontend_1). */
+    --table-background: #FFFFFF;
+    --table-border: var(--other-stroke);
+    --table-radius: 6px;
+    --table-font-family: var(--nav-font-family);
+    --table-font-size: 12px;
+    --table-header-background: #F5F5F7;
+    --table-header-foreground: var(--text-primary);
+    --table-row-height: 34px;
+    --table-row-hover-background: rgba(0, 0, 0, 0.04);
+    --table-padding-x: 12px;
+    --table-divider: var(--other-divider);
+    --table-cell-divider: rgba(0, 0, 0, 0.06);
+    --table-footer-foreground: var(--text-secondary);
+    --table-footer-font-size: 12px;
+
+    /* Toolbar de la tabla (buscador y combobox de filtro). */
+    --table-filter-height: 36px;
+    --table-filter-background: #FFFFFF;
+    --table-filter-border: var(--other-stroke);
+    --table-filter-radius: 6px;
+    --table-filter-font-size: 12px;
+
+    /* Badges de estado de la tabla (rol y diabético). */
+    --table-badge-radius: 9999px;
+    --table-badge-font-family: var(--nav-font-family);
+    --table-badge-font-size: 11px;
+    --table-badge-font-weight: 500;
+    --table-badge-padding-y: 2px;
+    --table-badge-padding-x: 8px;
+
+    /* Header: tamaños y estados derivados del theme. */
+    --header-height: 48px;
+    --header-padding-x: 16px;
+    --header-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    --header-hover-background: rgba(255, 255, 255, 0.10);
+    --header-muted-foreground: rgba(255, 255, 255, 0.60);
+    --header-user-radius: 6px;
+    --header-brand-font-size: 0.95rem;
+    --header-user-font-size: 0.8rem;
+}
+

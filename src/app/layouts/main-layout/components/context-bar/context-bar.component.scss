@@ -1,0 +1,61 @@
+// Réplica de la ContextBar de erp-template/frontend_1, 100% basado en tokens del theme.
+.context-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--ctx-gap);
+    padding: var(--ctx-padding-y) var(--ctx-padding-x);
+    background-color: var(--ctx-background);
+    border-bottom: 1px solid var(--ctx-border);
+    flex: 0 0 auto;
+    overflow-x: auto;
+    font-family: var(--ctx-font-family);
+    font-size: var(--ctx-font-size);
+
+    &__pin {
+        font-size: var(--ctx-icon-size);
+        height: var(--ctx-icon-size);
+        width: var(--ctx-icon-size);
+        color: var(--ctx-foreground-muted);
+        flex-shrink: 0;
+    }
+
+    &__crumbs {
+        display: flex;
+        align-items: center;
+        gap: var(--ctx-crumb-gap);
+        min-width: 0;
+    }
+
+    &__crumb {
+        display: flex;
+        align-items: center;
+        gap: var(--ctx-crumb-gap);
+        flex-shrink: 0;
+
+        &--link {
+            color: var(--ctx-foreground-muted);
+            text-decoration: none;
+            white-space: nowrap;
+            transition: color 0.15s ease;
+
+            &:hover {
+                color: var(--ctx-foreground);
+            }
+        }
+
+        &--separator {
+            font-size: var(--ctx-icon-size);
+            height: var(--ctx-icon-size);
+            width: var(--ctx-icon-size);
+            color: var(--ctx-foreground-muted);
+        }
+    }
+
+    &__crumb--current {
+        font-weight: 700;
+        color: var(--ctx-foreground);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

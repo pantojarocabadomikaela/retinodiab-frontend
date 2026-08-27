@@ -1,0 +1,79 @@
+<div class="registry-tab">
+    <div class="registry-container">
+        <div class="registry-container__logo">
+            <span class="registry-container__logo--img"></span>
+        </div>
+
+        <form class="registry-container__body" [formGroup]="registryForm" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="outline" class="registry-container__body--input">
+                <mat-label>Nombre de Paciente</mat-label>
+
+                <input formControlName="nombre" required matInput placeholder="Mikaela Pantoja">
+
+                <mat-error *ngIf="registryForm.get('nombre')?.invalid && registryForm.get('nombre')?.touched">
+                    El nombre de paciente debe tener al menos 5 caracteres.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="registry-container__body--input">
+                <mat-label>Correo Electronico</mat-label>
+
+                <input formControlName="email" required matInput placeholder="correo@example.com">
+
+                <mat-error *ngIf="registryForm.get('email')?.invalid && registryForm.get('email')?.touched">
+                    El nombre de usuario debe tener al menos 4 caracteres.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="registry-container__body--input">
+                <mat-label>Password</mat-label>
+
+                <input formControlName="password" required matInput [type]="hidePassword ? 'password' : 'text'"
+                    placeholder="*********">
+
+                <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
+                    <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+
+                <mat-error *ngIf="registryForm.get('password')?.invalid && registryForm.get('password')?.touched">
+                    La contraseña es requerida y debe tener al menos 4 caracteres.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="example-form-field">
+                <mat-label>Seleccione la fecha de nacimiento</mat-label>
+                <input formControlName="fecha_nacimiento" matInput [matDatepicker]="datepicker">
+                <mat-hint>MM/DD/AAAA</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+                <mat-datepicker #datepicker>
+                    <mat-datepicker-actions>
+                        <button mat-button matDatepickerCancel>Cancelar</button>
+                        <button mat-raised-button color="primary" matDatepickerApply>Aceptar</button>
+                    </mat-datepicker-actions>
+                </mat-datepicker>
+                <mat-error *ngIf="registryForm.get('fecha_nacimiento')?.invalid && registryForm.get('fecha_nacimiento')?.touched">
+                    La fecha de nacimiento es requerida.
+                </mat-error>
+            </mat-form-field>
+            
+            <mat-label>Rol</mat-label>
+            <mat-radio-group formControlName="rol" required name="rol">
+                <mat-radio-button value="paciente">Paciente</mat-radio-button>
+                <mat-radio-button value="administrador">Administrador</mat-radio-button>
+                <mat-radio-button value="servicio">Servicio</mat-radio-button>
+            </mat-radio-group>
+            <mat-error *ngIf="registryForm.get('rol')?.invalid">
+                Seleccione un rol.
+            </mat-error>
+
+            <mat-checkbox *ngIf="registryForm.get('rol')?.value === 'paciente'" formControlName="diabetes"
+                color="primary" class="login-container__body--checkbox">
+                Diabetico
+            </mat-checkbox>
+
+            <button mat-raised-button color="primary" type="submit" class="registry-container__body--button" [disabled]="registryForm.invalid">
+                Registrar
+            </button>
+        </form>
+    </div>
+</div>

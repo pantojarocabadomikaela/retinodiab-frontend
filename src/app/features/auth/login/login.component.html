@@ -1,0 +1,75 @@
+<div class="login-split">
+
+    <!-- Panel izquierdo: presentación y características -->
+    <section class="login-split__presentation">
+        <div class="login-split__brand">
+            <mat-icon class="login-split__brand--icon">visibility</mat-icon>
+            <span class="login-split__brand--name">{{ loginConstants.BRAND_NAME }}</span>
+        </div>
+
+        <h1 class="login-split__subtitle">{{ loginConstants.PRESENTATION_SUBTITLE }}</h1>
+
+        <div class="login-split__features">
+            <ul class="features-card">
+                <li class="features-card__item" *ngFor="let feature of loginFeatures">
+                    <mat-icon class="features-card__item--icon">{{ feature.icon }}</mat-icon>
+                    <span class="features-card__item--text">{{ feature.text }}</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Panel derecho: formulario de login -->
+    <section class="login-split__form">
+        <div class="login-form">
+            <div class="login-form__icon">
+                <mat-icon>visibility</mat-icon>
+            </div>
+
+            <h2 class="login-form__title">{{ loginConstants.LOGIN_TITLE }}</h2>
+            <p class="login-form__subtitle">{{ loginConstants.LOGIN_SUBTITLE }}</p>
+
+            <form class="login-form__body" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div class="login-form__field">
+                    <label class="login-form__label">{{ loginConstants.EMAIL_LABEL }}</label>
+
+                    <input class="login-form__input"
+                           formControlName="email"
+                           type="email"
+                           placeholder="{{ loginConstants.EMAIL_PLACEHOLDER }}">
+
+                    <span class="login-form__error"
+                          *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+                        El correo electrónico debe tener al menos 4 caracteres.
+                    </span>
+                </div>
+
+                <div class="login-form__field">
+                    <label class="login-form__label">{{ loginConstants.PASSWORD_LABEL }}</label>
+
+                    <div class="login-form__control">
+                        <input class="login-form__input login-form__input--password"
+                               formControlName="password"
+                               [type]="hidePassword ? 'password' : 'text'"
+                               placeholder="{{ loginConstants.PASSWORD_PLACEHOLDER }}">
+
+                        <button type="button" class="login-form__toggle" (click)="hidePassword = !hidePassword"
+                                aria-label="Mostrar u ocultar la contraseña">
+                            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                        </button>
+                    </div>
+
+                    <span class="login-form__error"
+                          *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                        La contraseña es requerida y debe tener al menos 4 caracteres.
+                    </span>
+                </div>
+
+                <button type="submit" class="login-form__submit">{{ loginConstants.LOGIN_BUTTON }}</button>
+            </form>
+
+            <footer class="login-form__footer">{{ loginConstants.COPYRIGHT }}</footer>
+        </div>
+    </section>
+
+</div>

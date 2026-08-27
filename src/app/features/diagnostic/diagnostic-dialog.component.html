@@ -1,0 +1,67 @@
+<div class="app-dialog__header">
+    <div class="app-dialog__header-top">
+        <h2 mat-dialog-title class="app-dialog__title">Nuevo Diagnóstico</h2>
+        <button mat-icon-button class="app-dialog__close" type="button" (click)="onNoClick()" aria-label="Cerrar">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <p class="app-dialog__description">Sube la imagen del fondo de ojo y completa los datos aquí.</p>
+</div>
+
+<mat-dialog-content class="app-dialog__content">
+    <form [formGroup]="diagnosticoForm">
+        <div class="app-dialog__field">
+            <label class="app-dialog__label" for="dgn-usuario">Selecciona un paciente</label>
+            <div *ngIf="isLoadingUsers" style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                <mat-spinner diameter="20"></mat-spinner>
+                <span style="color:#888;font-size:13px;">Cargando pacientes...</span>
+            </div>
+            <mat-form-field appearance="outline" class="app-dialog__input" *ngIf="!isLoadingUsers"
+                [class.app-dialog__input--invalid]="diagnosticoForm.get('usuario')?.invalid && diagnosticoForm.get('usuario')?.touched">
+                <input id="dgn-usuario" #pacienteInput matInput formControlName="usuario" type="text"
+                    placeholder="Buscar paciente por nombre o email..."
+                    [matAutocomplete]="auto" (input)="filtrarPacientes($any($event.target).value)">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="mostrarPaciente"
+                    (optionSelected)="onPacienteSeleccionado()">
+                    <mat-option *ngFor="let paciente of pacientesFiltrados" [value]="paciente.email"
+                        (click)="onPacienteSeleccionado(paciente)">
+                        {{ paciente.nombre }} ({{ paciente.email }})
+                    </mat-option>
+                    <mat-option *ngIf="pacientesFiltrados.length === 0" disabled>
+                        Sin resultados
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+            <span class="app-dialog__error"
+                *ngIf="diagnosticoForm.get('usuario')?.invalid && diagnosticoForm.get('usuario')?.touched">
+                Por favor selecciona a un paciente.
+            </span>
+        </div>
+
+        <div class="app-dialog__field">
+            <label class="app-dialog__label" for="dgn-observaciones">Observaciones</label>
+            <mat-form-field appearance="outline" class="app-dialog__input"
+                [class.app-dialog__input--invalid]="diagnosticoForm.get('observaciones')?.invalid && diagnosticoForm.get('observaciones')?.touched">
+                <input id="dgn-observaciones" formControlName="observaciones" matInput placeholder="Anota las observaciones">
+            </mat-form-field>
+            <span class="app-dialog__error"
+                *ngIf="diagnosticoForm.get('observaciones')?.invalid && diagnosticoForm.get('observaciones')?.touched">
+                Por favor anota tus observaciones.
+            </span>
+        </div>
+
+        <div class="app-dialog__field">
+            <label class="app-dialog__label" for="dgn-imagen">Imagen del fondo de ojo</label>
+            <input id="dgn-imagen" type="file" class="app-dialog__file" accept="image/*"
+                (change)="handleImageChange($event)">
+            <span class="app-dialog__error" *ngIf="mostrarErrorImagen">
+                Selecciona una imagen.
+            </span>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions class="app-dialog__footer">
+    <button type="button" class="app-dialog__btn app-dialog__btn--outline" (click)="onNoClick()">Cancelar</button>
+    <button type="button" class="app-dialog__btn app-dialog__btn--primary" (click)="onSave()" [disabled]="diagnosticoForm.invalid">Guardar</button>
+</mat-dialog-actions>

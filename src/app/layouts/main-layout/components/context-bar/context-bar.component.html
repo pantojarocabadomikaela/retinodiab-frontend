@@ -1,0 +1,13 @@
+<div class="context-bar">
+    <mat-icon class="context-bar__pin">home</mat-icon>
+
+    <div class="context-bar__crumbs">
+        <ng-container *ngFor="let crumb of breadcrumbs; let last = last">
+            <span class="context-bar__crumb" *ngIf="!last">
+                <a class="context-bar__crumb--link" [routerLink]="crumb.path">{{ crumb.title }}</a>
+                <mat-icon class="context-bar__crumb--separator">chevron_right</mat-icon>
+            </span>
+            <span class="context-bar__crumb--current" *ngIf="last">{{ crumb.title }}</span>
+        </ng-container>
+    </div>
+</div>

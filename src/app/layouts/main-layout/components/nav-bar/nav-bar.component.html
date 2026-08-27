@@ -1,0 +1,35 @@
+<nav class="nav-bar">
+    <ng-container *ngFor="let item of items">
+        <a *ngIf="!item.children?.length; else dropdown"
+           class="nav-bar__item"
+           [routerLink]="item.path"
+           routerLinkActive="nav-bar__item--active"
+           [attr.title]="item.title">
+            <mat-icon class="nav-bar__item--icon" *ngIf="item.icon">{{ item.icon }}</mat-icon>
+            <span class="nav-bar__item--label">{{ item.title }}</span>
+        </a>
+
+        <ng-template #dropdown>
+            <button type="button"
+                    class="nav-bar__item nav-bar__item--button"
+                    [class.nav-bar__item--soft-active]="isActive(item)"
+                    [matMenuTriggerFor]="menu"
+                    [attr.title]="item.title">
+                <mat-icon class="nav-bar__item--icon" *ngIf="item.icon">{{ item.icon }}</mat-icon>
+                <span class="nav-bar__item--label">{{ item.title }}</span>
+                <mat-icon class="nav-bar__item--chevron">keyboard_arrow_down</mat-icon>
+            </button>
+
+            <mat-menu #menu="matMenu" xPosition="after" yPosition="below" class="nav-bar__menu">
+                <button mat-menu-item
+                        class="nav-bar__menu-item"
+                        *ngFor="let child of item.children"
+                        [routerLink]="child.path"
+                        routerLinkActive="nav-bar__menu-item--active">
+                    <mat-icon *ngIf="child.icon">{{ child.icon }}</mat-icon>
+                    <span>{{ child.title }}</span>
+                </button>
+            </mat-menu>
+        </ng-template>
+    </ng-container>
+</nav>

@@ -1,0 +1,144 @@
+// Réplica del NavBar de erp-template/frontend_1, 100% basado en tokens del theme.
+.nav-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--nav-gap);
+    height: var(--nav-height);
+    padding: 0 var(--nav-padding-x);
+    background-color: var(--nav-background);
+    border-bottom: 1px solid var(--nav-border);
+    box-shadow: var(--nav-shadow);
+    overflow-x: auto;
+    flex: 0 0 auto;
+
+    &__item {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--nav-item-gap);
+        height: var(--nav-item-height);
+        padding: 0 var(--nav-padding-x);
+        border-radius: var(--nav-radius);
+        font-family: var(--nav-font-family);
+        font-size: var(--nav-font-size);
+        font-weight: var(--nav-font-weight);
+        color: var(--nav-foreground);
+        text-decoration: none;
+        white-space: nowrap;
+        transition: background-color 0.15s ease, color 0.15s ease;
+
+        // Resets propios del <button> (antes de los estados para que no sobrescriban el activo).
+        // Sin "font: inherit" para conservar la tipografía del ítem (familia/tamaño/peso del theme).
+        &--button {
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        &:hover {
+            background-color: var(--nav-hover-background);
+        }
+
+        // Estado activo de ítem directo: mismo color que el hover (selección persistente).
+        &--active {
+            background-color: var(--nav-active-background);
+            color: var(--nav-active-foreground);
+
+            &:hover {
+                background-color: var(--nav-active-hover-background);
+                color: var(--nav-active-foreground);
+            }
+        }
+
+        // Estado activo de menú padre: mismo color que el hover (se mantiene al marcar un submenú).
+        &--soft-active {
+            background-color: var(--nav-active-soft-background);
+            color: var(--nav-active-foreground);
+
+            &:hover {
+                background-color: var(--nav-active-soft-hover-background);
+                color: var(--nav-active-foreground);
+            }
+        }
+
+        &--icon {
+            font-size: var(--nav-icon-size);
+            height: var(--nav-icon-size);
+            width: var(--nav-icon-size);
+        }
+
+        &--chevron {
+            font-size: var(--nav-chevron-size);
+            height: var(--nav-chevron-size);
+            width: var(--nav-chevron-size);
+            color: var(--nav-chevron-foreground);
+        }
+    }
+}
+
+// Panel desplegable de los menús padre (se renderiza fuera del componente, en el overlay).
+// Angular Material 17 renderiza MDC: .mat-mdc-menu-content / .mat-mdc-menu-item.
+// El panel se estiliza desde tokens de Material heredables (--mat-menu-item-*) para que
+// ganen a los valores por defecto sin depender del orden de las hojas de estilo.
+::ng-deep .nav-bar__menu {
+    --mat-menu-item-label-text-font: var(--nav-menu-font-family);
+    --mat-menu-item-label-text-size: var(--nav-menu-font-size);
+    --mat-menu-item-label-text-line-height: 1;
+    --mat-menu-item-label-text-weight: var(--nav-font-weight);
+    --mat-menu-item-label-text-color: var(--nav-menu-foreground);
+    --mat-menu-item-leading-spacing: var(--nav-menu-padding-x);
+    --mat-menu-item-trailing-spacing: var(--nav-menu-padding-x);
+    --mat-menu-item-with-icon-leading-spacing: var(--nav-menu-padding-x);
+    --mat-menu-item-with-icon-trailing-spacing: var(--nav-menu-padding-x);
+    --mat-menu-item-spacing: var(--nav-item-gap);
+    --mat-menu-item-icon-size: var(--nav-menu-icon-size);
+    --mat-menu-item-icon-color: var(--nav-menu-foreground);
+
+    background-color: var(--nav-menu-background);
+    border-radius: var(--nav-menu-radius);
+    box-shadow: var(--nav-menu-shadow);
+
+    .mat-mdc-menu-content {
+        padding: 4px;
+    }
+
+    .mat-mdc-menu-item {
+        display: flex;
+        align-items: center;
+        gap: var(--nav-item-gap);
+        height: var(--nav-menu-item-height);
+        min-height: var(--nav-menu-item-height);
+        padding: 0 var(--nav-menu-padding-x);
+        border-radius: var(--nav-radius);
+        font-family: var(--nav-menu-font-family);
+        font-size: var(--nav-menu-font-size);
+        font-weight: var(--nav-font-weight);
+        line-height: 1;
+        white-space: nowrap;
+        color: var(--nav-menu-foreground);
+
+        &:hover:not(.nav-bar__menu-item--active) {
+            background-color: var(--nav-menu-hover-background);
+            color: var(--nav-menu-hover-foreground);
+        }
+
+        .mat-icon {
+            font-size: var(--nav-menu-icon-size);
+            height: var(--nav-menu-icon-size);
+            width: var(--nav-menu-icon-size);
+            margin-right: 0;
+        }
+    }
+
+    .nav-bar__menu-item--active {
+        background-color: var(--nav-menu-active-background);
+        color: var(--nav-menu-active-foreground);
+    }
+}
+
+// El panel abraza el contenido (la referencia usa w-auto). Selector combinado para
+// ganar a .mat-mdc-menu-panel por especificidad, no por orden.
+::ng-deep .mat-mdc-menu-panel.nav-bar__menu {
+    min-width: 0;
+    max-width: 260px;
+}

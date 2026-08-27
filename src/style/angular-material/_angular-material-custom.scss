@@ -1,0 +1,68 @@
+@use '@angular/material' as mat;
+
+.dense-2 {
+    @include mat.all-component-densities(-2);
+}
+
+.rounded {
+    .mdc-notched-outline__leading {
+        border-top-left-radius: 2em !important;
+        border-bottom-left-radius: 2em !important;
+        width: 3em !important;
+    }
+
+    .mdc-notched-outline__trailing {
+        border-top-right-radius: 2em !important;
+        border-bottom-right-radius: 2em !important;
+    }
+}
+
+.mat-mdc-icon-button:hover .mat-mdc-button-persistent-ripple:before {
+    opacity: 0.09 !important;
+}
+
+.mat-mdc-select-arrow {
+    color: var(--field-border-focused) !important;
+}
+
+.mdc-checkbox__checkmark {
+    color: var(--primary-contrast-light) !important;
+}
+
+.mdc-text-field--outlined {
+    --mdc-outlined-text-field-container-shape: 10px !important;
+}
+
+.mdc-text-field--focused {
+    background-color: var(--field-background-focused);
+}
+
+.mdc-text-field--outlined:not(.mdc-text-field--disabled, .mdc-text-field--invalid) .mdc-notched-outline__leading,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled, .mdc-text-field--invalid) .mdc-notched-outline__notch,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled, .mdc-text-field--invalid) .mdc-notched-outline__trailing {
+    border-color: var(--field-border) !important;
+}
+
+.mdc-text-field--outlined:not(.mdc-text-field--disabled, .mdc-text-field--invalid).mdc-text-field--focused .mdc-notched-outline__leading,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled, .mdc-text-field--invalid).mdc-text-field--focused .mdc-notched-outline__notch,
+.mdc-text-field--outlined:not(.mdc-text-field--disabled, .mdc-text-field--invalid).mdc-text-field--focused .mdc-notched-outline__trailing {
+    border-color: var(--field-border-focused) !important;
+}
+
+.mdc-text-field--outlined.mdc-text-field--disabled .mdc-notched-outline__leading,
+.mdc-text-field--outlined.mdc-text-field--disabled .mdc-notched-outline__notch,
+.mdc-text-field--outlined.mdc-text-field--disabled .mdc-notched-outline__trailing {
+    border-color: var(--field-border-disabled) !important;
+}
+
+.mat-mdc-unelevated-button.mat-primary:not(:disabled):hover {
+    background-color: var(--primary-dark);
+}
+
+.mat-mdc-unelevated-button[disabled],
+.mat-mdc-unelevated-button.mat-mdc-button-disabled {
+    cursor: default;
+    pointer-events: none;
+    color: var(--primary-contrast-light) !important;
+    background-color: var(--actions-disabled-background) !important;
+}

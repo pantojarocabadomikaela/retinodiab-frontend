@@ -1,0 +1,17 @@
+<div class="app-dialog__header">
+    <div class="app-dialog__header-top">
+        <h2 mat-dialog-title class="app-dialog__title">{{ data.titulo }}</h2>
+        <button mat-icon-button class="app-dialog__close" type="button" (click)="onNoClick()" aria-label="Cerrar">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+</div>
+
+<mat-dialog-content class="app-dialog__content">
+    <p class="app-dialog__message">{{ data.mensaje }}</p>
+</mat-dialog-content>
+
+<mat-dialog-actions class="app-dialog__footer">
+    <button type="button" class="app-dialog__btn app-dialog__btn--outline" (click)="onNoClick()">Cancelar</button>
+    <button type="button" class="app-dialog__btn app-dialog__btn--primary" (click)="onConfirm()">Eliminar</button>
+</mat-dialog-actions>

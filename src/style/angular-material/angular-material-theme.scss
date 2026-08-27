@@ -1,0 +1,67 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@use './angular-material-palette' as palette;
+@use './angular-material-custom';
+
+@use '../base/color/color' as color;
+@use '../base/typography/font-family' as font-family;
+
+@include mat.core();
+
+$dragon-challenge-web-primary: mat.define-palette(palette.$primary-color-palette);
+$dragon-challenge-web-accent: mat.define-palette(palette.$accent-color-palette);
+$dragon-challenge-web-warn: mat.define-palette(palette.$warn-color-palette);
+
+$theme-foreground-palette: (
+    base: color.$text-primary,
+    divider: color.$other-divider,
+    dividers: color.$other-divider,
+    disabled: color.$actions-disabled-background,
+    disabled-button: color.$actions-disabled-background,
+    disabled-text: color.$text-disabled,
+    elevation: color.$text-primary,
+    hint-text: color.$text-primary,
+    secondary-text: color.$text-secondary,
+    icon: color.$text-primary,
+    icons: color.$text-primary,
+    text: color.$text-primary,
+    slider-min: color.$text-primary,
+    slider-off: color.$text-primary,
+    slider-off-active: color.$text-primary,
+);
+
+@function define-theme($config) {
+    $theme: mat.define-light-theme($config);
+    $color: map.get($theme, color);
+    $color: map.merge(
+            $color,
+            (
+                foreground: $theme-foreground-palette,
+            )
+    );
+    @return map.merge(
+            $theme,
+            (
+                color: $color,
+                density: 0
+            )
+    );
+}
+
+$app-typography: mat.define-typography-config(
+    $font-family: font-family.$font-family,
+);
+
+$app-theme: define-theme(
+        (
+            color: (
+                primary: $dragon-challenge-web-primary,
+                accent: $dragon-challenge-web-accent,
+                warn: $dragon-challenge-web-warn,
+            ),
+        )
+);
+
+@include mat.all-component-themes($app-theme);
+@include mat.all-component-typographies($app-typography);

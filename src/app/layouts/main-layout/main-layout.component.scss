@@ -1,0 +1,39 @@
+.main-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+
+    &__header {
+        flex: 0 0 auto;
+    }
+
+    &__nav-bar {
+        flex: 0 0 auto;
+    }
+
+    &__context-bar {
+        flex: 0 0 auto;
+    }
+
+    &__body {
+        flex: 1;
+        display: flex;
+        min-height: 0;
+    }
+
+    &__content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        background-color: var(--primary-background);
+    }
+
+    &__page {
+        flex: 1;
+        min-height: 0;
+        overflow: auto;
+        padding: 1rem;
+    }
+}

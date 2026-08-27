@@ -1,0 +1,100 @@
+<div class="app-dialog__header">
+    <div class="app-dialog__header-top">
+        <h2 mat-dialog-title class="app-dialog__title">Actualizar Usuario</h2>
+        <button mat-icon-button class="app-dialog__close" type="button" (click)="onNoClick()" aria-label="Cerrar">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <p class="app-dialog__description">Modifica los detalles del usuario aquí.</p>
+</div>
+
+<mat-dialog-content class="app-dialog__content">
+    <form [formGroup]="registryForm">
+        <div class="app-dialog__field">
+            <label class="app-dialog__label" for="upd-nombre">Nombre de Paciente</label>
+            <mat-form-field appearance="outline" class="app-dialog__input"
+                [class.app-dialog__input--invalid]="registryForm.get('nombre')?.invalid && registryForm.get('nombre')?.touched">
+                <input id="upd-nombre" formControlName="nombre" matInput placeholder="Mikaela Pantoja">
+            </mat-form-field>
+            <span class="app-dialog__error"
+                *ngIf="registryForm.get('nombre')?.invalid && registryForm.get('nombre')?.touched">
+                El nombre de paciente debe tener al menos 5 caracteres.
+            </span>
+        </div>
+
+        <div class="app-dialog__field">
+            <label class="app-dialog__label" for="upd-email">Correo Electronico</label>
+            <mat-form-field appearance="outline" class="app-dialog__input"
+                [class.app-dialog__input--invalid]="registryForm.get('email')?.invalid && registryForm.get('email')?.touched">
+                <input id="upd-email" formControlName="email" matInput placeholder="correo@example.com">
+            </mat-form-field>
+            <span class="app-dialog__error"
+                *ngIf="registryForm.get('email')?.invalid && registryForm.get('email')?.touched">
+                El nombre de usuario debe tener al menos 4 caracteres.
+            </span>
+        </div>
+
+        <div class="app-dialog__field">
+            <label class="app-dialog__label" for="upd-password">Password</label>
+            <mat-form-field appearance="outline" class="app-dialog__input"
+                [class.app-dialog__input--invalid]="registryForm.get('password')?.invalid && registryForm.get('password')?.touched">
+                <input id="upd-password" formControlName="password" matInput
+                    [type]="hidePassword ? 'password' : 'text'" placeholder="Dejar en blanco para no cambiar">
+                <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword"
+                    aria-label="Mostrar contraseña">
+                    <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+            </mat-form-field>
+            <span class="app-dialog__error"
+                *ngIf="registryForm.get('password')?.invalid && registryForm.get('password')?.touched">
+                La contraseña debe tener al menos 4 caracteres.
+            </span>
+        </div>
+
+        <div class="app-dialog__field-row">
+            <div class="app-dialog__field app-dialog__field--grow">
+                <label class="app-dialog__label" for="upd-fecha">Fecha de nacimiento</label>
+                <mat-form-field appearance="outline" class="app-dialog__input"
+                    [class.app-dialog__input--invalid]="registryForm.get('fecha_nacimiento')?.invalid && registryForm.get('fecha_nacimiento')?.touched">
+                    <input id="upd-fecha" formControlName="fecha_nacimiento" matInput [matDatepicker]="datepicker">
+                    <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #datepicker>
+                        <mat-datepicker-actions>
+                            <button mat-button matDatepickerCancel>Cancelar</button>
+                            <button mat-raised-button color="primary" matDatepickerApply>Aceptar</button>
+                        </mat-datepicker-actions>
+                    </mat-datepicker>
+                </mat-form-field>
+                <span class="app-dialog__error"
+                    *ngIf="registryForm.get('fecha_nacimiento')?.invalid && registryForm.get('fecha_nacimiento')?.touched">
+                    La fecha de nacimiento es requerida.
+                </span>
+            </div>
+        </div>
+
+        <div class="app-dialog__field">
+            <label class="app-dialog__label">Rol</label>
+            <mat-radio-group formControlName="rol" required name="rol">
+                <mat-radio-button value="paciente">Paciente</mat-radio-button>
+                <mat-radio-button value="administrador">Administrador</mat-radio-button>
+                <mat-radio-button value="servicio">Servicio</mat-radio-button>
+            </mat-radio-group>
+            <span class="app-dialog__error" *ngIf="registryForm.get('rol')?.invalid">
+                Seleccione un rol.
+            </span>
+        </div>
+
+        <mat-checkbox *ngIf="registryForm.get('rol')?.value === 'paciente'" formControlName="diabetes"
+            color="primary" class="app-dialog__checkbox">
+            Diabetico
+        </mat-checkbox>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions class="app-dialog__footer">
+    <button type="button" class="app-dialog__btn app-dialog__btn--outline" (click)="onNoClick()">Cancelar</button>
+    <button type="button" class="app-dialog__btn app-dialog__btn--primary" (click)="onSave()" [disabled]="registryForm.invalid || isSaving">
+        <mat-spinner *ngIf="isSaving" diameter="18" style="display:inline-block"></mat-spinner>
+        <span *ngIf="!isSaving">Guardar</span>
+    </button>
+</mat-dialog-actions>

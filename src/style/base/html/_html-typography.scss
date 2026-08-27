@@ -1,0 +1,20 @@
+@use '../typography/font-family' as font-family;
+@use '../typography/font-weight' as font-weight;
+@use '../typography/font-size' as font-size;
+@use '../typography/line-height' as line-height;
+@use '../mixin/mixin' as mixin;
+
+html,
+body {
+    font-family: font-family.$font-family;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@include mixin.typography-selector('button', font-weight.$button-medium, font-size.$button-medium, line-height.$button-medium);
+@include mixin.typography-selector('h1', font-weight.$h1, font-size.$h1, line-height.$h1);
+@include mixin.typography-selector('h2', font-weight.$h2, font-size.$h2, line-height.$h2);
+@include mixin.typography-selector('h3', font-weight.$h3, font-size.$h3, line-height.$h3);
+@include mixin.typography-selector('h4', font-weight.$h4, font-size.$h4, line-height.$h4);
+@include mixin.typography-selector('h5', font-weight.$h5, font-size.$h5, line-height.$h5);
+@include mixin.typography-selector('h6', font-weight.$h6, font-size.$h6, line-height.$h6);

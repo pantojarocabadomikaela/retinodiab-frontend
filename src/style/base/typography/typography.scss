@@ -1,0 +1,42 @@
+@use './font-family' as font-family;
+@use './font-weight' as font-weight;
+@use './font-size' as font-size;
+@use './line-height' as line-height;
+@use '../mixin/mixin' as mixin;
+
+.font-weight-light {
+    font-weight: font-weight.$light !important;
+    * {
+        font-weight: font-weight.$light !important;
+    }
+}
+
+.font-weight-regular {
+    font-weight: font-weight.$regular !important;
+    * {
+        font-weight: font-weight.$regular !important;
+    }
+}
+
+.font-weight-medium {
+    font-weight: font-weight.$medium !important;
+    * {
+        font-weight: font-weight.$medium !important;
+    }
+}
+
+@include mixin.typography-selector('.title', font-weight.$title, font-size.$title, line-height.$title, var(--primary));
+@include mixin.typography-selector('.subtitle', font-weight.$subtitle, font-size.$subtitle, line-height.$subtitle, var(--primary));
+@include mixin.typography-selector('.heading', font-weight.$heading, font-size.$heading, line-height.$heading, var(--text-primary));
+@include mixin.typography-selector('.sub-heading', font-weight.$sub-heading, font-size.$sub-heading, line-height.$sub-heading, var(--text-primary));
+@include mixin.typography-selector('.normal-text', font-weight.$normal-text, font-size.$normal-text, line-height.$normal-text, var(--text-primary));
+@include mixin.typography-selector('.normal-text-blue', font-weight.$normal-text, font-size.$normal-text, line-height.$normal-text, var(--primary));
+@include mixin.typography-selector('.button-medium', font-weight.$button-medium, font-size.$button-medium, line-height.$button-medium);
+@include mixin.typography-selector('.button-small', font-weight.$button-small, font-size.$button-small, line-height.$button-small);
+@include mixin.typography-selector('.caption', font-weight.$caption, font-size.$caption, line-height.$caption);
+@include mixin.typography-selector('.overline', font-weight.$overline, font-size.$overline, line-height.$overline);
+@include mixin.typography-selector('.avatar-letter', font-weight.$avatar-letter, font-size.$avatar-letter, line-height.$avatar-letter);
+@include mixin.typography-selector('.input-label', font-weight.$input-label, font-size.$input-label, line-height.$input-label);
+@include mixin.typography-selector('.helper-text', font-weight.$helper-text, font-size.$helper-text, line-height.$helper-text);
+@include mixin.typography-selector('.input-text', font-weight.$input-text, font-size.$input-text, line-height.$input-text);
+@include mixin.typography-selector('.tooltip', font-weight.$tooltip, font-size.$tooltip, line-height.$tooltip);

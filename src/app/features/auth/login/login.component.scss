@@ -1,0 +1,241 @@
+// Pantalla dividida: ocupa todo el viewport (50% presentación, 50% formulario).
+.login-split {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+
+    // Panel izquierdo: presentación sobre degradado púrpura del theme.
+    &__presentation {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        padding: 3rem;
+        width: 50%;
+        color: var(--primary-contrast-light);
+        background: linear-gradient(180deg, var(--primary-dark) 0%, var(--primary) 60%, var(--secondary-dark) 100%);
+    }
+
+    // Panel derecho: formulario sobre fondo blanco.
+    &__form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+        width: 50%;
+        background-color: #FFFFFF;
+        overflow-y: auto;
+    }
+}
+
+// Marca en el panel de presentación.
+.login-split {
+    &__brand {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+
+        &--icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            font-size: 2.5rem;
+        }
+
+        &--name {
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+    }
+
+    &__subtitle {
+        max-width: 32rem;
+        margin: 0;
+        text-align: center;
+        font-size: 1.25rem;
+        font-weight: 500;
+        line-height: 1.5;
+        color: var(--primary-contrast-light);
+    }
+}
+
+// Tarjeta de características con efecto glassmorphism.
+.features-card {
+    list-style: none;
+    width: 100%;
+    max-width: 30rem;
+    margin: 0;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+
+    &__item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.75rem 0;
+        color: var(--primary-contrast-light);
+
+        &--icon {
+            flex-shrink: 0;
+            color: var(--primary-contrast-light);
+        }
+
+        &--text {
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+    }
+}
+
+// Contenedor del formulario.
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 26rem;
+
+    // Isotipo circular en la parte superior.
+    &__icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 4.5rem;
+        height: 4.5rem;
+        margin-bottom: 1.25rem;
+        border-radius: 50%;
+        background-color: var(--primary);
+        color: var(--primary-contrast-light);
+
+        mat-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            font-size: 2.5rem;
+        }
+    }
+
+    &__title {
+        margin: 0;
+        color: var(--primary);
+        font-size: 1.75rem;
+        font-weight: 700;
+    }
+
+    &__subtitle {
+        margin: 0.5rem 0 2rem;
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        text-align: center;
+    }
+
+    &__body {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        width: 100%;
+    }
+
+    &__field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+
+    &__label {
+        color: var(--text-primary);
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    &__control {
+        position: relative;
+    }
+
+    &__input {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 0.85rem 1rem;
+        border: 1px solid var(--field-border);
+        border-radius: 10px;
+        outline: none;
+        background-color: #FFFFFF;
+        color: var(--text-primary);
+        font-size: 1rem;
+        transition: border-color 0.2s ease, background-color 0.2s ease;
+
+        &::placeholder {
+            color: var(--text-hint);
+        }
+
+        &:focus {
+            border-color: var(--field-border-focused);
+            background-color: var(--field-background-focused);
+        }
+
+        // Padding extra para que el botón del ojo no tape el texto.
+        &--password {
+            padding-right: 3rem;
+        }
+    }
+
+    &__toggle {
+        position: absolute;
+        top: 50%;
+        right: 0.5rem;
+        transform: translateY(-50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        border: none;
+        background: transparent;
+        color: var(--primary);
+        cursor: pointer;
+    }
+
+    &__error {
+        color: var(--primary);
+        font-size: 0.8rem;
+    }
+
+    &__submit {
+        width: 100%;
+        padding: 0.85rem 1rem;
+        border: none;
+        border-radius: 10px;
+        background-color: var(--primary);
+        color: var(--primary-contrast-light);
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+            background-color: var(--primary-dark);
+        }
+    }
+
+    &__footer {
+        margin-top: 2.5rem;
+        color: var(--text-secondary);
+        font-size: 0.8rem;
+    }
+}
+
+// Móvil: se oculta el panel de presentación y queda solo el formulario centrado.
+@media (max-width: 768px) {
+    .login-split {
+        &__presentation {
+            display: none;
+        }
+
+        &__form {
+            width: 100%;
+        }
+    }
+}

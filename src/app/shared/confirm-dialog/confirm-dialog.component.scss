@@ -1,0 +1,10 @@
+// El formato del diálogo vive en src/style/components/dialog.scss
+// (se aplica a través del panelClass="app-dialog" al abrir el componente).
+
+.app-dialog__message {
+    margin: 0;
+    font-family: var(--nav-font-family);
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--text-primary);
+}

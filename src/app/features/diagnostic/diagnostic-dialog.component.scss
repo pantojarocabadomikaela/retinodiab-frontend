@@ -1,0 +1,38 @@
+// El formato del diálogo y de sus campos vive en src/style/components/dialog.scss
+// (se aplica a través del panelClass="app-dialog" al abrir el componente).
+
+// Input de archivo: caja plana al estilo del buscador de las tablas.
+.app-dialog__file {
+    display: block;
+    width: 100%;
+    height: var(--table-filter-height);
+    box-sizing: border-box;
+    padding: 0 0.75rem;
+    font-family: var(--table-font-family);
+    font-size: var(--table-filter-font-size);
+    color: var(--text-primary);
+    background-color: var(--table-filter-background);
+    border: 1px solid var(--table-filter-border);
+    border-radius: var(--table-filter-radius);
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+    &:focus {
+        border-color: var(--field-border-focused);
+        box-shadow: 0 0 0 1px var(--field-border-focused);
+    }
+
+    &::file-selector-button {
+        height: calc(var(--table-filter-height) - 2px);
+        margin: 0 0.75rem 0 -0.75rem;
+        padding: 0 0.75rem;
+        border: none;
+        border-right: 1px solid var(--table-filter-border);
+        background-color: var(--secondary-background);
+        color: var(--text-primary);
+        font-family: var(--nav-font-family);
+        font-size: var(--table-filter-font-size);
+        cursor: pointer;
+    }
+}

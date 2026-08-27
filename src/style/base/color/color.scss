@@ -1,0 +1,90 @@
+$text-primary: #1C1C1C;
+$text-secondary: #73677E;
+$text-disabled: #9F9F9F;
+$text-hint: #9F9F9F;
+
+$field-background-focused: #F2F0F4;
+$field-border: #C9BDD6;
+$field-border-focused: #806C93;
+$field-border-disabled: #b3b3b3;
+
+$actions-main: #E8E2EE;
+$actions-background: #EDE9F1;
+$actions-disabled-background: #C9C2D2;
+$actions-disabled-text: white;
+
+$other-stroke: #C9BDD6;
+$other-divider: #E8E2EE;
+$other-backdrop: #808080;
+
+$primary-background: #F3EEFA;
+$primary-light: #A78BD0;
+$primary-border: #8E6BB8;
+$primary-main: #4D1F7A;
+$primary-dark: #3B1660;
+$primary-contrast-light: #FFFFFF;
+$primary-contrast-dark: #1C1C1C;
+
+$secondary-background: #EFE8F5;
+$secondary-light: #B9A8CF;
+$secondary-border: #8E6BB8;
+$secondary-main: #806C93;
+$secondary-dark: #66527A;
+$secondary-contrast-light: #FFFFFF;
+$secondary-contrast-dark: #FFFFFF;
+
+$info-background: #E8F4FD;
+$info-light: #64B6F7;
+$info-border: #90CAF9;
+$info-main: #2196F3;
+$info-dark: #0B79D0;
+$info-text-dark: #0D3C61;
+$info-contrast-light: #FFFFFF;
+$info-contrast-dark: $text-primary;
+
+$success-background: #ECF6ED;
+$success-light: #7BC67E;
+$success-border: #A5D7A7;
+$success-main: #4CAF50;
+$success-dark: #3B873E;
+$success-text-dark: #1E4620;
+$success-contrast-light: #FFFFFF;
+$success-contrast-dark: $text-primary;
+
+$warning-background: #FFF4E5;
+$warning-light: #FFB347;
+$warning-border: #FFCB80;
+$warning-main: #FF9800;
+$warning-dark: #C77700;
+$warning-text-dark: #663C00;
+$warning-contrast-light: #FFFFFF;
+$warning-contrast-dark: $text-primary;
+
+$error-background: #FDEBEA;
+$error-light: #F88078;
+$error-border: #F9A19A;
+$error-main: #F42C2C;
+$error-dark: #E31B0C;
+$error-text-dark: #611A15;
+$error-contrast-light: #FFFFFF;
+$error-contrast-dark: $text-primary;
+
+.text-primary {
+    color: $text-primary;
+}
+
+.text-secondary {
+    color: $text-secondary;
+}
+
+.text-disabled {
+    color: $text-disabled;
+}
+
+.text-hint {
+    color: $text-hint;
+}
+
+.color-secondary-dark {
+    color: $secondary-dark;
+}

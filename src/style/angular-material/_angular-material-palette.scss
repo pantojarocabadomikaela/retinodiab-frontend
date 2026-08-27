@@ -1,0 +1,77 @@
+@use '../base/color/color' as color;
+
+
+$primary-color-palette: (
+    50: color.$primary-background,
+    100: color.$primary-light,
+    200: color.$primary-light,
+    300: color.$primary-border,
+    400: color.$primary-main,
+    500: color.$primary-main,
+    600: color.$primary-main,
+    700: color.$primary-main,
+    800: color.$primary-dark,
+    900: color.$primary-dark,
+    contrast: (
+        50: color.$primary-contrast-dark,
+        100: color.$primary-contrast-dark,
+        200: color.$primary-contrast-dark,
+        300: color.$primary-contrast-dark,
+        400: color.$primary-contrast-light,
+        500: color.$primary-contrast-light,
+        600: color.$primary-contrast-light,
+        700: color.$primary-contrast-light,
+        800: color.$primary-contrast-light,
+        900: color.$primary-contrast-light,
+    ),
+);
+
+$accent-color-palette: (
+    50: color.$secondary-background,
+    100: color.$secondary-light,
+    200: color.$secondary-light,
+    300: color.$secondary-border,
+    400: color.$secondary-main,
+    500: color.$secondary-main,
+    600: color.$secondary-main,
+    700: color.$secondary-main,
+    800: color.$secondary-dark,
+    900: color.$secondary-dark,
+    contrast: (
+        50: color.$secondary-contrast-dark,
+        100: color.$secondary-contrast-dark,
+        200: color.$secondary-contrast-dark,
+        300: color.$secondary-contrast-dark,
+        400: color.$secondary-contrast-light,
+        500: color.$secondary-contrast-light,
+        600: color.$secondary-contrast-light,
+        700: color.$secondary-contrast-light,
+        800: color.$secondary-contrast-light,
+        900: color.$secondary-contrast-light,
+    ),
+);
+
+$warn-color-palette: (
+    50: color.$error-background,
+    100: color.$error-light,
+    200: color.$error-light,
+    300: color.$error-border,
+    400: color.$error-main,
+    500: color.$error-main,
+    600: color.$error-main,
+    700: color.$error-main,
+    800: color.$error-dark,
+    900: color.$error-dark,
+    contrast: (
+        50: color.$error-contrast-dark,
+        100: color.$error-contrast-dark,
+        200: color.$error-contrast-dark,
+        300: color.$error-contrast-dark,
+        400: color.$error-contrast-light,
+        500: color.$error-contrast-light,
+        600: color.$error-contrast-light,
+        700: color.$error-contrast-light,
+        800: color.$error-contrast-light,
+        900: color.$error-contrast-light,
+    ),
+);

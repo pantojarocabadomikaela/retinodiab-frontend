@@ -1,0 +1,310 @@
+// Historial: réplica del look & feel de la tabla de usuarios (frontend_1).
+// Columna flex que llena la altura del área de página (main-layout__page).
+.history {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+
+    &__toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem 1rem;
+        margin-bottom: 1rem;
+        flex: 0 0 auto;
+
+        &--filters {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.75rem;
+            flex: 1 1 auto;
+            min-width: 0;
+        }
+    }
+
+    &__search {
+        position: relative;
+        display: flex;
+        align-items: center;
+        flex: 1 1 14rem;
+        min-width: 10rem;
+        max-width: 24rem;
+
+        &--icon {
+            position: absolute;
+            left: 0.625rem;
+            font-size: 18px;
+            height: 18px;
+            width: 18px;
+            color: var(--text-secondary);
+            pointer-events: none;
+        }
+
+        &--input {
+            width: 100%;
+            height: var(--table-filter-height);
+            padding: 0 0.75rem 0 2.25rem;
+            font-family: var(--table-font-family);
+            font-size: var(--table-filter-font-size);
+            color: var(--text-primary);
+            background-color: var(--table-filter-background);
+            border: 1px solid var(--table-filter-border);
+            border-radius: var(--table-filter-radius);
+            outline: none;
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+            &::placeholder {
+                color: var(--text-hint);
+            }
+
+            &:focus {
+                border-color: var(--field-border-focused);
+                box-shadow: 0 0 0 1px var(--field-border-focused);
+            }
+        }
+    }
+
+    &__filter {
+        width: 10rem;
+        flex: 0 0 auto;
+        font-family: var(--table-font-family);
+    }
+
+    // Contenedor de la tabla: equivalente a "rounded-md border" de frontend_1.
+    // Crece para llenar la altura restante y hace scroll interno cuando se necesita.
+    &__table-wrap {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow: auto;
+        background-color: var(--table-background);
+        border: 1px solid var(--table-border);
+        border-radius: var(--table-radius);
+    }
+
+    &__table {
+        width: 100%;
+        background-color: var(--table-background);
+
+        // Tokens de Material 17 para alturas, colores y tipografías de la tabla.
+        --mat-table-header-container-height: var(--table-row-height);
+        --mat-table-row-item-container-height: var(--table-row-height);
+        --mat-table-background-color: var(--table-background);
+        --mat-table-header-headline-color: var(--table-header-foreground);
+        --mat-table-header-headline-font: var(--table-font-family);
+        --mat-table-header-headline-size: var(--table-font-size);
+        --mat-table-header-headline-weight: 600;
+        --mat-table-row-item-label-text-color: var(--text-primary);
+        --mat-table-row-item-label-text-font: var(--table-font-family);
+        --mat-table-row-item-label-text-size: var(--table-font-size);
+        --mat-table-row-item-outline-color: var(--table-divider);
+
+        th.mat-mdc-header-cell,
+        td.mat-mdc-cell {
+            padding: 0 var(--table-padding-x);
+            border-right: 1px solid var(--table-cell-divider);
+
+            &:last-child {
+                border-right: none;
+            }
+        }
+
+        // Material 17 no emite un token para el fondo del header: se aplica directo.
+        // Sticky para que la cabecera quede visible al hacer scroll vertical interno.
+        .mat-mdc-header-row {
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            background-color: var(--table-header-background);
+        }
+
+        .mat-mdc-row:hover .mat-mdc-cell {
+            background-color: var(--table-row-hover-background);
+        }
+
+        .mat-sort-header-arrow {
+            color: var(--text-secondary);
+        }
+    }
+
+    // Celdas con el botón de imagen: centrado horizontal del icono.
+    &__cell-imagen {
+        text-align: center;
+    }
+
+    // Botón icono (ojo) para ver la imagen: color del nav-bar y hover como el de
+    // los menús. Se fuerza el radio de 6px en todos los estados para que MDC
+    // (icon-button base y persistent-ripple traen 50%) no lo vuelva redondo.
+    &__btn-imagen {
+        width: 28px;
+        height: 28px;
+        padding: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 0;
+        vertical-align: middle;
+        background-color: var(--nav-background);
+        border-radius: 6px;
+        transition: background-color 0.15s ease, color 0.15s ease;
+        // Sin capa de estado de MDC para que el hover sea exactamente el del menú.
+        --mdc-icon-button-state-layer-color: transparent;
+        --mdc-icon-button-hover-state-layer-color: transparent;
+        --mdc-icon-button-hover-state-layer-opacity: 0;
+        --mdc-icon-button-focus-state-layer-color: transparent;
+        --mdc-icon-button-state-layer-size: 28px;
+        --mdc-icon-button-icon-size: 14px;
+
+        &:hover,
+        &:focus,
+        &:active {
+            border-radius: 6px;
+        }
+
+        .mat-icon {
+            font-size: 14px;
+            height: 14px;
+            width: 14px;
+            color: var(--nav-foreground);
+        }
+
+        &:hover {
+            background-color: var(--nav-menu-hover-background);
+
+            .mat-icon {
+                color: var(--nav-menu-hover-foreground);
+            }
+        }
+
+        // El ripple persistente de MDC trae 50%: se mantiene cuadrado como el botón.
+        // ::ng-deep porque el span del ripple es interno del componente de Material.
+        ::ng-deep .mat-mdc-button-ripple,
+        ::ng-deep .mat-mdc-button-persistent-ripple,
+        ::ng-deep .mat-mdc-button-persistent-ripple::before {
+            border-radius: 6px;
+        }
+    }
+
+    &__empty {
+        height: 6rem;
+        text-align: center;
+        color: var(--text-secondary);
+        font-family: var(--table-font-family);
+        font-size: var(--table-font-size);
+    }
+
+    // El paginador de Material se mantiene oculto: solo se usa su lógica de paginación.
+    &__paginator {
+        display: none;
+    }
+
+    &__pagination {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem 1rem;
+        padding: 0.75rem 0.25rem 0;
+        flex: 0 0 auto;
+        font-family: var(--table-font-family);
+        font-size: var(--table-footer-font-size);
+        color: var(--table-footer-foreground);
+
+        &--controls {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        &--btn {
+            height: 28px;
+            padding: 0 0.75rem;
+            font-family: var(--table-font-family);
+            font-size: var(--table-footer-font-size);
+            color: var(--text-primary);
+            background-color: var(--table-filter-background);
+            border: 1px solid var(--table-filter-border);
+            border-radius: var(--table-filter-radius);
+            cursor: pointer;
+            transition: background-color 0.15s ease, border-color 0.15s ease;
+
+            &:hover:not(:disabled) {
+                border-color: var(--field-border-focused);
+            }
+
+            &:disabled {
+                color: var(--text-disabled);
+                cursor: not-allowed;
+            }
+        }
+    }
+}
+
+// Combobox compacto (36px) al estilo del SelectTrigger de frontend_1.
+::ng-deep .history__filter {
+    --mdc-outlined-text-field-outline-color: var(--table-filter-border);
+    --mdc-outlined-text-field-hover-outline-color: var(--table-filter-border);
+    --mdc-outlined-text-field-focus-outline-color: var(--field-border-focused);
+    --mdc-outlined-text-field-outline-width: 1px;
+    --mat-form-field-container-height: var(--table-filter-height);
+    // Tokens que consume .mat-mdc-select para el texto del trigger.
+    --mat-select-trigger-text-font: var(--table-font-family);
+    --mat-select-trigger-text-size: var(--table-filter-font-size);
+    --mat-select-trigger-text-line-height: 20px;
+
+    .mat-mdc-text-field-wrapper.mdc-text-field--outlined {
+        height: var(--table-filter-height);
+        border-radius: var(--table-filter-radius);
+        background-color: var(--table-filter-background);
+    }
+
+    .mat-mdc-form-field-flex {
+        height: var(--table-filter-height);
+        align-items: center;
+    }
+
+    .mat-mdc-form-field-infix {
+        min-height: var(--table-filter-height);
+        padding-top: 0;
+        padding-bottom: 0;
+        border-top-width: 0;
+    }
+
+    .mat-mdc-form-field-subscript-wrapper {
+        display: none;
+    }
+
+    .mat-mdc-select-arrow {
+        color: var(--text-secondary);
+    }
+
+    .mat-mdc-select-value-text {
+        font-family: var(--table-font-family);
+        font-size: var(--table-filter-font-size);
+        line-height: 20px;
+    }
+}
+
+// Panel desplegable del combobox: réplica del SelectContent de frontend_1.
+// Doble clase para ganar especificidad sobre .mat-mdc-select-panel(.above) de MDC.
+::ng-deep .mat-mdc-select-panel.history__filter-panel {
+    min-width: 10rem;
+    padding: 4px;
+    background-color: var(--table-filter-background);
+    border: 1px solid var(--table-filter-border);
+    border-radius: var(--table-filter-radius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    // Tokens que consume .mat-mdc-option para el texto de las opciones.
+    --mat-option-label-text-font: var(--table-font-family);
+    --mat-option-label-text-size: var(--table-filter-font-size);
+    --mat-option-label-text-line-height: 16px;
+    --mat-option-label-text-weight: 400;
+
+    .mat-mdc-option {
+        min-height: 32px;
+        padding: 0 8px;
+        border-radius: 4px;
+    }
+}

@@ -1,0 +1,57 @@
+<div class="app-dialog__header">
+    <div class="app-dialog__header-top">
+        <h2 mat-dialog-title class="app-dialog__title">Mi Perfil</h2>
+        <button mat-icon-button class="app-dialog__close" type="button" (click)="onNoClick()" aria-label="Cerrar">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <p class="app-dialog__description">Consulta los datos de tu cuenta.</p>
+</div>
+
+<mat-dialog-content class="app-dialog__content">
+    <div class="app-dialog__field">
+        <label class="app-dialog__label">Nombre</label>
+        <mat-form-field appearance="outline" class="app-dialog__input">
+            <input matInput [readonly]="true" [value]="usuario?.nombre ?? ''">
+        </mat-form-field>
+    </div>
+
+    <div class="app-dialog__field">
+        <label class="app-dialog__label">Correo Electronico</label>
+        <mat-form-field appearance="outline" class="app-dialog__input">
+            <input matInput [readonly]="true" [value]="usuario?.email ?? ''">
+        </mat-form-field>
+    </div>
+
+    <div class="app-dialog__field">
+        <label class="app-dialog__label">Password</label>
+        <mat-form-field appearance="outline" class="app-dialog__input">
+            <input matInput [readonly]="true" type="password" value="••••••">
+        </mat-form-field>
+    </div>
+
+    <div class="app-dialog__field">
+        <label class="app-dialog__label">Fecha de nacimiento</label>
+        <mat-form-field appearance="outline" class="app-dialog__input">
+            <input matInput [readonly]="true" [value]="fechaNacimiento">
+        </mat-form-field>
+    </div>
+
+    <div class="app-dialog__field">
+        <label class="app-dialog__label">Rol</label>
+        <mat-radio-group [disabled]="true" [value]="usuario?.rol" name="rol">
+            <mat-radio-button value="paciente">Paciente</mat-radio-button>
+            <mat-radio-button value="administrador">Administrador</mat-radio-button>
+            <mat-radio-button value="servicio">Servicio</mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+    <mat-checkbox *ngIf="usuario?.rol === 'paciente'" [disabled]="true" [checked]="usuario?.diabetes"
+        color="primary" class="app-dialog__checkbox">
+        Diabetico
+    </mat-checkbox>
+</mat-dialog-content>
+
+<mat-dialog-actions class="app-dialog__footer">
+    <button type="button" class="app-dialog__btn app-dialog__btn--primary" (click)="onNoClick()">Cerrar</button>
+</mat-dialog-actions>

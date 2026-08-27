@@ -1,0 +1,56 @@
+@mixin snack-bar-themed($text-color, $icon-color) {
+    .snack-bar {
+        &__label {
+            color: $text-color;
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+        &__icon {
+            color: $icon-color;
+        }
+        &__actions {
+            &__close {
+                color: $text-color;
+                border: none;
+                background: transparent;
+                padding: 0;
+                cursor: pointer;
+                display: inline-flex;
+                align-items: center;
+            }
+        }
+    }
+}
+
+.snack-bar {
+    display: flex;
+    &--success {
+        @include snack-bar-themed(var(--success-text-dark), var(--success-main));
+    }
+    &--info {
+        @include snack-bar-themed(var(--info-text-dark), var(--info-main));
+    }
+    &--warning {
+        @include snack-bar-themed(var(--warning-text-dark), var(--warning-main));
+    }
+    &--error {
+        @include snack-bar-themed(var(--error-text-dark), var(--error-main));
+    }
+}
+
+::ng-deep .mat-mdc-snack-bar-container.snackbar--info .mdc-snackbar__surface {
+    background-color: var(--info-background);
+}
+
+::ng-deep .mat-mdc-snack-bar-container.snackbar--success .mdc-snackbar__surface {
+    background-color: var(--success-background);
+}
+
+::ng-deep .mat-mdc-snack-bar-container.snackbar--warning .mdc-snackbar__surface {
+    background-color: var(--warning-background);
+}
+
+::ng-deep .mat-mdc-snack-bar-container.snackbar--error .mdc-snackbar__surface {
+    background-color: var(--error-background);
+}

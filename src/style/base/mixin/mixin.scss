@@ -1,0 +1,19 @@
+@mixin typography-properties($font-weight, $font-size, $line-height, $color:null) {
+    font-weight: $font-weight;
+    font-size: $font-size;
+    line-height: $line-height;
+    @if($color != null){
+        color: $color;
+    }
+}
+
+@mixin typography-selector($selector, $font-weight, $font-size, $line-height, $color:null) {
+    #{$selector} {
+        @include typography-properties($font-weight, $font-size, $line-height, $color);
+        &.apply-typography-inner {
+            *:not(mat-icon) {
+                @include typography-properties($font-weight, $font-size, $line-height, $color);
+            }
+        }
+    }
+}

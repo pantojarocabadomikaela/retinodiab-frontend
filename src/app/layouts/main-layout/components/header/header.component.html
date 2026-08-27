@@ -1,0 +1,41 @@
+<header class="header">
+    <div class="header__left">
+        <div class="header__brand">
+            <mat-icon class="header__brand--icon">visibility</mat-icon>
+            <span class="header__brand--name">{{ headerConstants.BRAND_NAME }}</span>
+        </div>
+    </div>
+
+    <div class="header__right">
+        <button type="button" class="header__user-trigger" [matMenuTriggerFor]="userMenu"
+                aria-label="Menu de usuario">
+            <mat-icon class="header__user-trigger--icon">person</mat-icon>
+            <span class="header__user-trigger--name">{{ username }}</span>
+            <mat-icon class="header__user-trigger--chevron">keyboard_arrow_down</mat-icon>
+        </button>
+
+        <mat-menu #userMenu="matMenu" xPosition="after" class="header__user-menu">
+            <div matMenuClose (click)="openVerPerfil()" class="header__user-menu__card">
+                <span class="header__user-menu__card--avatar">{{ initials }}</span>
+                <div class="header__user-menu__card--info">
+                    <p class="header__user-menu__card--name">{{ username }}</p>
+                    <p class="header__user-menu__card--role">{{ roleLabel }}</p>
+                </div>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            <button mat-menu-item (click)="openCambiarPassword()">
+                <mat-icon>lock</mat-icon>
+                <span>Cambiar contraseña</span>
+            </button>
+
+            <mat-divider></mat-divider>
+
+            <button mat-menu-item (click)="goToLogin()" class="header__user-menu__signout">
+                <mat-icon>logout</mat-icon>
+                <span>{{ headerConstants.HEADER_BUTTON_SIGNOUT_VALUE }}</span>
+            </button>
+        </mat-menu>
+    </div>
+</header>

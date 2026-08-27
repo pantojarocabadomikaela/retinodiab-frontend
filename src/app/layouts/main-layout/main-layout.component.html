@@ -1,0 +1,17 @@
+<div class="main-layout">
+    <div class="main-layout__header">
+        <app-header></app-header>
+    </div>
+
+    <app-nav-bar class="main-layout__nav-bar" [menuItems]="menuItems"></app-nav-bar>
+
+    <app-context-bar class="main-layout__context-bar" [breadcrumbs]="breadcrumbs"></app-context-bar>
+
+    <div class="main-layout__body">
+        <div class="main-layout__content">
+            <div class="main-layout__page">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

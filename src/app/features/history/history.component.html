@@ -1,0 +1,86 @@
+<div class="history">
+    <div class="history__toolbar">
+        <div class="history__toolbar--filters">
+            <div class="history__search">
+                <mat-icon class="history__search--icon">search</mat-icon>
+                <input #buscar class="history__search--input" type="text" placeholder="Buscar en historial..."
+                    [value]="searchFilter" (input)="applySearch(buscar.value)" />
+            </div>
+
+            <mat-form-field appearance="outline" class="history__filter" subscriptSizing="dynamic"
+                *ngIf="verTodos">
+                <mat-select aria-label="Filtrar por usuario" [value]="userFilter || 'all'"
+                    panelClass="history__filter-panel" (selectionChange)="cambioDeUsuario($event)">
+                    <mat-option value="all">Todos</mat-option>
+                    <mat-option *ngFor="let usuario of usuarios" [value]="usuario.email">{{ usuario.email }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="history__table-wrap" appAutoPageSize [appPaginator]="paginator" *ngIf="!isLoading">
+        <table mat-table [dataSource]="dataSource" matSort class="history__table">
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+                <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="nombre">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre Completo</th>
+                <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+                <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="observaciones">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Observaciones</th>
+                <td mat-cell *matCellDef="let element">{{ element.observaciones }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="resultado">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Resultado</th>
+                <td mat-cell *matCellDef="let element">{{ element.resultado }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="imagen">
+                <th mat-header-cell *matHeaderCellDef>Imagen</th>
+                <td mat-cell *matCellDef="let element" class="history__cell-imagen">
+                    <button mat-icon-button type="button" class="history__btn-imagen"
+                        (click)="verImagen(element.imagen)" aria-label="Ver imagen">
+                        <mat-icon>visibility</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <ng-template matNoDataRow>
+                <tr>
+                    <td class="mat-cell history__empty" [attr.colspan]="displayedColumns.length">No se encontraron
+                        registros.</td>
+                </tr>
+            </ng-template>
+        </table>
+    </div>
+
+    <app-skeleton-table *ngIf="isLoading" [count]="5" [cols]="6"></app-skeleton-table>
+
+    <mat-paginator #paginator class="history__paginator" [pageSize]="10" [pageSizeOptions]="[10]" [hidePageSize]="true"
+        [showFirstLastButtons]="false"></mat-paginator>
+
+    <div class="history__pagination" *ngIf="dataSource.filteredData.length > 0">
+        <span class="history__pagination--info">{{ dataSource.filteredData.length }} registro(s)</span>
+        <div class="history__pagination--controls">
+            <button type="button" class="history__pagination--btn" [disabled]="!paginator.hasPreviousPage()"
+                (click)="paginator.previousPage()">Anterior</button>
+            <span class="history__pagination--page">Página {{ paginator.pageIndex + 1 }} de {{
+                paginator.getNumberOfPages() }}</span>
+            <button type="button" class="history__pagination--btn" [disabled]="!paginator.hasNextPage()"
+                (click)="paginator.nextPage()">Siguiente</button>
+        </div>
+    </div>
+</div>

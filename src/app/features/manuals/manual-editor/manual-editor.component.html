@@ -1,0 +1,31 @@
+<div class="manual-editor">
+    <div class="manual-editor__toolbar">
+        <div class="manual-editor__toolbar--filters">
+            <mat-form-field appearance="outline" class="manual-editor__filter" subscriptSizing="dynamic">
+                <mat-label>Seleccione el manual</mat-label>
+                <mat-select aria-label="Seleccionar manual" panelClass="manual-editor__filter-panel"
+                    (selectionChange)="onManualSelectionChange($event)">
+                    @for (manual of manuales; track manual) {
+                    <mat-option [value]="manual.value">{{ manual.viewValue }}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <button mat-raised-button color="primary" type="button" class="manual-editor__toolbar--button"
+            [disabled]="!manualSeleccionado" (click)="guardarManual()">
+            <mat-icon>save</mat-icon>
+            <span>Guardar</span>
+        </button>
+    </div>
+
+    <div class="manual-editor__editor-wrap">
+        @if (manualSeleccionado && editor) {
+        <div class="NgxEditor__Wrapper">
+            <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
+            <ngx-editor [editor]="editor" [(ngModel)]="dataModel" [disabled]="false"
+                placeholder="'Escribe aquí el contenido del manual...'"></ngx-editor>
+        </div>
+        }
+    </div>
+</div>

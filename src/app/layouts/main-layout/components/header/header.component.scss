@@ -1,0 +1,172 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: var(--header-height);
+    padding: 0 var(--header-padding-x);
+    background-color: var(--primary);
+    color: var(--primary-contrast-light);
+    box-shadow: var(--header-shadow);
+    z-index: 20;
+
+    &__left {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    &__brand {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        &--icon {
+            color: var(--primary-contrast-light);
+        }
+
+        &--name {
+            color: var(--primary-contrast-light);
+            font-family: var(--mdc-list-list-item-label-text-font);
+            font-weight: 700;
+            font-size: var(--header-brand-font-size);
+            letter-spacing: -0.01em;
+        }
+    }
+
+    &__right {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    &__user-trigger {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        border: none;
+        background: transparent;
+        color: var(--primary-contrast-light);
+        padding: 4px 10px;
+        border-radius: var(--header-user-radius);
+        cursor: pointer;
+        font-family: var(--mdc-list-list-item-label-text-font);
+        font-size: var(--header-user-font-size);
+        line-height: 1.2;
+        transition: background-color 0.15s ease;
+
+        &:hover {
+            background-color: var(--header-hover-background);
+        }
+
+        &--icon {
+            font-size: 1rem;
+            height: 1rem;
+            width: 1rem;
+        }
+
+        &--name {
+            font-weight: 600;
+        }
+
+        &--chevron {
+            font-size: 1rem;
+            height: 1rem;
+            width: 1rem;
+            color: var(--header-muted-foreground);
+        }
+    }
+}
+
+// Menú desplegable del usuario (Angular Material 17 renderiza MDC: .mat-mdc-menu-content).
+// Tipografía igual que la NavBar, vía tokens heredables de Material (--mat-menu-item-*).
+::ng-deep .header__user-menu {
+    --mat-menu-item-label-text-font: var(--nav-font-family);
+    --mat-menu-item-label-text-size: var(--nav-font-size);
+    --mat-menu-item-label-text-line-height: 1;
+    --mat-menu-item-label-text-weight: var(--nav-font-weight);
+    --mat-menu-item-leading-spacing: var(--nav-font-size);
+    --mat-menu-item-trailing-spacing: var(--nav-font-size);
+    --mat-menu-item-with-icon-leading-spacing: var(--nav-font-size);
+    --mat-menu-item-with-icon-trailing-spacing: var(--nav-font-size);
+    --mat-menu-item-spacing: var(--nav-font-size);
+    --mat-menu-item-icon-size: var(--nav-font-size);
+
+    .mat-mdc-menu-content {
+        padding: 4px;
+    }
+
+    &__card {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.4rem 0.5rem;
+        cursor: pointer;
+
+        &--avatar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background-color: var(--primary-background);
+            color: var(--primary);
+            font-weight: 600;
+            font-size: var(--nav-font-size);
+            flex-shrink: 0;
+        }
+
+        &--info {
+            min-width: 0;
+        }
+
+        &--name {
+            margin: 0;
+            color: var(--text-primary);
+            font-family: var(--nav-font-family);
+            font-weight: 600;
+            font-size: var(--nav-font-size);
+        }
+
+        &--role {
+            margin: 0;
+            color: var(--text-secondary);
+            font-family: var(--nav-font-family);
+            font-size: var(--nav-font-size);
+        }
+    }
+
+    .mat-mdc-menu-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        height: 28px;
+        min-height: 28px;
+        font-family: var(--nav-font-family);
+        font-size: var(--nav-font-size);
+        line-height: 1;
+
+        .mat-icon {
+            font-size: var(--nav-font-size);
+            height: var(--nav-font-size);
+            width: var(--nav-font-size);
+            margin-right: 0;
+        }
+    }
+
+    &__signout {
+        --mat-menu-item-label-text-color: var(--error-main);
+        --mat-menu-item-icon-color: var(--error-main);
+        color: var(--error-main);
+
+        .mat-icon {
+            color: var(--error-main);
+        }
+    }
+}
+
+// Ancho del panel por especificidad (gana a .mat-mdc-menu-panel).
+::ng-deep .mat-mdc-menu-panel.header__user-menu {
+    min-width: 220px;
+    max-width: 320px;
+}

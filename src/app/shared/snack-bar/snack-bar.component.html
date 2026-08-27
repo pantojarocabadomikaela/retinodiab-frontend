@@ -1,0 +1,13 @@
+<div class="snack-bar" [ngClass]="'snack-bar--' + type">
+    <span matSnackBarLabel class="snack-bar__label">
+        <mat-icon class="snack-bar__icon">{{iconName}}</mat-icon>
+
+        <span>{{message}}</span>
+    </span>
+
+    <span class="snack-bar__actions" matSnackBarActions>
+        <button type="button" class="snack-bar__actions__close" (click)="close()" aria-label="Cerrar">
+            <mat-icon>close</mat-icon>
+        </button>
+    </span>
+</div>
