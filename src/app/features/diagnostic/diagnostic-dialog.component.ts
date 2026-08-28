@@ -41,6 +41,7 @@ export class DiagnosticDialogComponent implements OnInit, OnDestroy {
   pacientesFiltrados: Usuario[] = [];
   mostrarErrorImagen: boolean = false;
   isLoadingUsers = false;
+  isProcessing = false;
 
   @ViewChild(MatAutocompleteTrigger) autoTrigger!: MatAutocompleteTrigger;
   @ViewChild('pacienteInput') pacienteInput!: ElementRef<HTMLInputElement>;
@@ -111,6 +112,9 @@ export class DiagnosticDialogComponent implements OnInit, OnDestroy {
   }
 
   onNoClick(): void {
+    if (this.isProcessing) {
+      return;
+    }
     this.dialogRef.close();
   }
 
@@ -123,6 +127,10 @@ export class DiagnosticDialogComponent implements OnInit, OnDestroy {
   }
 
   onSave(): void {
+    if (this.isProcessing) {
+      return;
+    }
+
     if (this.diagnosticoForm.invalid) {
       this.diagnosticoForm.markAllAsTouched();
       return;
@@ -145,12 +153,15 @@ export class DiagnosticDialogComponent implements OnInit, OnDestroy {
     formData.append('email', this.diagnosticoForm.get('usuario')?.value);
     formData.append('observaciones', this.diagnosticoForm.get('observaciones')?.value);
 
+    this.isProcessing = true;
     this.suscripcion = this.http.post<any>(this.apiUrl, formData).subscribe(
       response => {
+        this.isProcessing = false;
         this.snackBarService.openSnackBar(response.mensaje ?? 'Diagnóstico guardado', () => {}, SnackBarType.success);
         this.dialogRef.close(true);
       },
       error => {
+        this.isProcessing = false;
         this.snackBarService.openSnackBar('Error al crear diagnóstico: ' + (error?.error?.mensaje ?? error), () => {}, SnackBarType.error);
       });
   }

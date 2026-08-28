@@ -1,6 +1,34 @@
 // El formato del diálogo y de sus campos vive en src/style/components/dialog.scss
 // (se aplica a través del panelClass="app-dialog" al abrir el componente).
 
+.diagnostic-dialog__processing {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    color: var(--text-primary);
+    background: color-mix(in srgb, var(--secondary-background) 92%, transparent);
+    text-align: center;
+    cursor: wait;
+
+    span {
+        font-family: var(--nav-font-family);
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    small {
+        color: var(--text-secondary);
+        font-size: 0.85rem;
+    }
+}
+
 // Input de archivo: caja plana al estilo del buscador de las tablas.
 .app-dialog__file {
     display: block;

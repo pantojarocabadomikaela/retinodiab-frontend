@@ -8,6 +8,12 @@
     <p class="app-dialog__description">Sube la imagen del fondo de ojo y completa los datos aquí.</p>
 </div>
 
+<div class="diagnostic-dialog__processing" *ngIf="isProcessing" role="status" aria-live="polite">
+    <mat-spinner diameter="42"></mat-spinner>
+    <span>Realizando diagnóstico...</span>
+    <small>Esto puede tardar unos momentos.</small>
+</div>
+
 <mat-dialog-content class="app-dialog__content">
     <form [formGroup]="diagnosticoForm">
         <div class="app-dialog__field">
@@ -63,5 +69,5 @@
 
 <mat-dialog-actions class="app-dialog__footer">
     <button type="button" class="app-dialog__btn app-dialog__btn--outline" (click)="onNoClick()">Cancelar</button>
-    <button type="button" class="app-dialog__btn app-dialog__btn--primary" (click)="onSave()" [disabled]="diagnosticoForm.invalid">Guardar</button>
+    <button type="button" class="app-dialog__btn app-dialog__btn--primary" (click)="onSave()" [disabled]="diagnosticoForm.invalid || isProcessing">Guardar</button>
 </mat-dialog-actions>
