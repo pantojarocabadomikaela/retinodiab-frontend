@@ -22,6 +22,7 @@ import { Observable, Subscription } from 'rxjs';
 import { ApiService } from '../../core/services/api.service';
 import { SnackBarService } from '../../shared/snack-bar/services/snackbar.service';
 import { SnackBarType } from '../../shared/enums/snackbar-type.enum';
+import emailjs, { type EmailJSResponseStatus } from '@emailjs/browser'
 
 @Component({
   selector: 'app-create-user',
@@ -54,6 +55,7 @@ export class CreateUserComponent implements OnInit {
   hidePassword: boolean = true;
   private suscripcion: Subscription;
   isSaving = false;
+  
 
   constructor(
     private http: HttpClient,
@@ -83,6 +85,24 @@ export class CreateUserComponent implements OnInit {
   onSave(): void {
     if (this.registryForm.valid) {
       this.isSaving = true;
+      const templateParams = {
+        name: this.registryForm.value.nombre,
+        email: this.registryForm.value.email,
+      };
+
+      emailjs.send(
+        'service_jywqptx',     // Reemplaza con tu Service ID
+        'template_q9h4rzo',    // Reemplaza con tu Template ID
+        templateParams,
+        'kTysvucWb8D4cP03V'      // Reemplaza con tu Public Key
+      )
+      .then((response: EmailJSResponseStatus) => {
+        console.log('¡Correo enviado con éxito!', response.status, response.text);
+      })
+      .catch((error) => {
+        console.error('Error al enviar el correo:', error);
+      });
+
       this.suscripcion = this.crear(this.registryForm.value).subscribe(
         response => {
           this.isSaving = false;
