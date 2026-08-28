@@ -22,7 +22,7 @@ import { Observable, Subscription } from 'rxjs';
 import { ApiService } from '../../core/services/api.service';
 import { SnackBarService } from '../../shared/snack-bar/services/snackbar.service';
 import { SnackBarType } from '../../shared/enums/snackbar-type.enum';
-import emailjs, { type EmailJSResponseStatus } from '@emailjs/browser'
+import emailjs from '@emailjs/browser'
 
 @Component({
   selector: 'app-create-user',
@@ -82,7 +82,7 @@ export class CreateUserComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  onSave(): void {
+  async onSave(): Promise<void> {
     if (this.registryForm.valid) {
       this.isSaving = true;
       const templateParams = {
@@ -90,18 +90,20 @@ export class CreateUserComponent implements OnInit {
         email: this.registryForm.value.email,
       };
 
-      emailjs.send(
-        'service_jywqptx',     // Reemplaza con tu Service ID
-        'template_q9h4rzo',    // Reemplaza con tu Template ID
-        templateParams,
-        'kTysvucWb8D4cP03V'      // Reemplaza con tu Public Key
-      )
-      .then((response: EmailJSResponseStatus) => {
+      try {
+        const response = await emailjs.send(
+          'service_jywqptx',     // Reemplaza con tu Service ID
+          'template_q9h4rzo',    // Reemplaza con tu Template ID
+          templateParams,
+          'kTysvucWb8D4cP03V'      // Reemplaza con tu Public Key
+        );
         console.log('¡Correo enviado con éxito!', response.status, response.text);
-      })
-      .catch((error) => {
+      } catch (error) {
+        this.isSaving = false;
         console.error('Error al enviar el correo:', error);
-      });
+        this.snackBarService.openSnackBar('No se pudo enviar el correo error al crear el usuario.', () => {}, SnackBarType.error);
+        return;
+      }
 
       this.suscripcion = this.crear(this.registryForm.value).subscribe(
         response => {
