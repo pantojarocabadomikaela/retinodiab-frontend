@@ -55,7 +55,7 @@ export interface DiagnosticoElement {
 })
 export class DiagnosticComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  displayedColumns: string[] = ['id', 'paciente_nombre', 'email', 'observaciones', 'resultado', 'nombre', 'acciones'];
+  displayedColumns: string[] = ['paciente_nombre', 'email', 'observaciones', 'resultado', 'nombre', 'acciones'];
   apiUrl = '';
   suscripcion: Subscription;
   suscripcionEliminar: Subscription;

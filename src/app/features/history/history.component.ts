@@ -45,7 +45,7 @@ export class HistoryComponent implements OnInit, AfterViewInit, OnDestroy {
 
   suscripcionDiagnosticos: Subscription;
   suscripcionUsuarios: Subscription;
-  displayedColumns: string[] = ['id', 'nombre', 'email', 'observaciones', 'resultado', 'imagen'];
+  displayedColumns: string[] = ['nombre', 'email', 'observaciones', 'resultado', 'imagen'];
   dataSource = new MatTableDataSource<HistoryElement>([]);
   allTableData: HistoryElement[] = [];
   usuarios: Usuario[] = [];
