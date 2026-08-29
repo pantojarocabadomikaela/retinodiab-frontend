@@ -94,7 +94,11 @@ export class UpdateDiagnosticComponent implements OnInit, OnDestroy {
   }
 
   mostrarPaciente(email: string): string {
-    const paciente = this.usuarios.find(usuario => usuario.email === email);
+    const usuarios = this.usuarios ?? [];
+    const paciente = usuarios.find(usuario => usuario?.email === email);
+    if (!email) {
+      return '';
+    }
     return paciente ? `${paciente.nombre} (${paciente.email})` : email;
   }
 

@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -31,13 +32,15 @@ export interface DialogData {
     MatDialogContent,
     MatDialogActions,
     MatDialogClose,
+    CdkDrag,
+    CdkDragHandle,
   ],
   templateUrl: './image-view.component.html',
   styleUrl: './image-view.component.scss'
 })
 export class ImageViewComponent implements OnInit {
-  
-  valorImagen: string = ''
+
+  valorImagen: string = '';
 
   constructor(
     public dialogRef: MatDialogRef<ImageViewComponent>,
@@ -45,7 +48,7 @@ export class ImageViewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.valorImagen = 'data:image/png;base64,' + this.data.valor
+    this.valorImagen = 'data:image/png;base64,' + this.data.valor;
   }
 
   onNoClick(): void {

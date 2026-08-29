@@ -32,6 +32,20 @@
         overflow: hidden;
     }
 
+    &.image-view-dialog {
+        width: min(80vw, 900px);
+        height: min(80vh, 700px);
+        max-width: 95vw;
+        max-height: 95vh;
+
+        .mat-mdc-dialog-container .mdc-dialog__surface {
+            resize: both;
+            overflow: auto;
+            min-width: 320px;
+            min-height: 220px;
+        }
+    }
+
     // Normaliza los estilos base de MDC (títulos, contenidos y acciones).
     .mat-mdc-dialog-title,
     .mat-mdc-dialog-content,

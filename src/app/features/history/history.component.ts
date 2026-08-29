@@ -141,7 +141,11 @@ export class HistoryComponent implements OnInit, AfterViewInit, OnDestroy {
   verImagen(imagen: string) {
     this.dialog.open(ImageViewComponent, {
       data: { valor: imagen },
-      panelClass: 'app-dialog',
+      panelClass: ['app-dialog', 'image-view-dialog'],
+      width: 'min(80vw, 900px)',
+      maxWidth: '95vw',
+      height: 'min(80vh, 700px)',
+      maxHeight: '95vh',
     });
   }
 

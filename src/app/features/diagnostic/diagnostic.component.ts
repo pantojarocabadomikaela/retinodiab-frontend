@@ -132,7 +132,11 @@ export class DiagnosticComponent implements OnInit, AfterViewInit, OnDestroy {
   verImagen(imagen: string) {
     this.dialog.open(ImageViewComponent, {
       data: { valor: imagen },
-      panelClass: 'app-dialog',
+      panelClass: ['app-dialog', 'image-view-dialog'],
+      width: 'min(80vw, 700px)',
+      maxWidth: '95vw',
+      height: 'min(80vh, 600px)',
+      maxHeight: '95vh',
     });
   }
 

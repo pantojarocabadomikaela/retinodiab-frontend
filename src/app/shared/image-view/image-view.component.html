@@ -1,16 +1,17 @@
-<div class="app-dialog__header">
-    <div class="app-dialog__header-top">
-        <h2 mat-dialog-title class="app-dialog__title">Imagen</h2>
-        <button mat-icon-button class="app-dialog__close" type="button" (click)="onNoClick()" aria-label="Cerrar">
-            <mat-icon>close</mat-icon>
-        </button>
+<div class="image-view-dialog__wrapper" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragBoundary=".cdk-overlay-container">
+    <div class="app-dialog__header" cdkDragHandle>
+        <div class="app-dialog__header-top">
+            <h2 mat-dialog-title class="app-dialog__title">Imagen</h2>
+            <button mat-icon-button class="app-dialog__close" type="button" (click)="onNoClick()" aria-label="Cerrar">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
     </div>
+
+    <mat-dialog-content class="app-dialog__content image-view__content">
+        <div class="image-view__viewport">
+            <img class="imagen-ojos" [src]="valorImagen" alt="Imagen">
+        </div>
+    </mat-dialog-content>
 </div>
 
-<mat-dialog-content class="app-dialog__content">
-    <img class="imagen-ojos" [src]="valorImagen" alt="Imagen">
-</mat-dialog-content>
-
-<mat-dialog-actions class="app-dialog__footer app-dialog__footer--center">
-    <button type="button" class="app-dialog__btn app-dialog__btn--outline" (click)="onNoClick()">Cerrar</button>
-</mat-dialog-actions>
