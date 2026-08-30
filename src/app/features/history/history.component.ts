@@ -74,6 +74,9 @@ export class HistoryComponent implements OnInit, AfterViewInit, OnDestroy {
       this.suscripcionDiagnosticos = this.getTableData().subscribe(response => {
         this.allTableData = response;
         this.dataSource.data = response;
+        this.dataSource.paginator = this.paginator;
+        this.paginator.pageSize = 25;
+        this.paginator.firstPage();
         this.isLoading = false;
       },
         error => {
@@ -89,6 +92,9 @@ export class HistoryComponent implements OnInit, AfterViewInit, OnDestroy {
       this.suscripcionDiagnosticos = this.getTableData().subscribe(response => {
         this.allTableData = response;
         this.dataSource.data = this.allTableData.filter(fila => fila.email === usuario.email);
+        this.dataSource.paginator = this.paginator;
+        this.paginator.pageSize = 25;
+        this.paginator.firstPage();
         this.isLoading = false;
       },
         error => {

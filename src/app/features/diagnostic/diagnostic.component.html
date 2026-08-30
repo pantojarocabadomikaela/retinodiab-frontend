@@ -15,7 +15,7 @@
         </button>
     </div>
 
-    <div class="diagnostic__table-wrap" appAutoPageSize [appPaginator]="paginator" *ngIf="!isLoading">
+    <div class="diagnostic__table-wrap" *ngIf="!isLoading">
         <table mat-table [dataSource]="dataSource" matSort class="diagnostic__table">
             <ng-container matColumnDef="paciente_nombre">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre Completo</th>

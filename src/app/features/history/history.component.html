@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <div class="history__table-wrap" appAutoPageSize [appPaginator]="paginator" *ngIf="!isLoading">
+    <div class="history__table-wrap" *ngIf="!isLoading">
         <table mat-table [dataSource]="dataSource" matSort class="history__table">
             <ng-container matColumnDef="nombre">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre Completo</th>
@@ -64,8 +64,8 @@
 
     <app-skeleton-table *ngIf="isLoading" [count]="5" [cols]="6"></app-skeleton-table>
 
-    <mat-paginator #paginator class="history__paginator" [pageSize]="10" [pageSizeOptions]="[10]" [hidePageSize]="true"
-        [showFirstLastButtons]="false"></mat-paginator>
+    <mat-paginator #paginator class="history__paginator" [pageSize]="25" [pageSizeOptions]="[10, 25, 50, 100]" [hidePageSize]="false"
+        [showFirstLastButtons]="true"></mat-paginator>
 
     <div class="history__pagination" *ngIf="dataSource.filteredData.length > 0">
         <span class="history__pagination--info">{{ dataSource.filteredData.length }} registro(s)</span>

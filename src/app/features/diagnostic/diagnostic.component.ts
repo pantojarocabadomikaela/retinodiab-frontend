@@ -108,6 +108,8 @@ export class DiagnosticComponent implements OnInit, AfterViewInit, OnDestroy {
     this.suscripcion = this.getTableData().subscribe(response => {
       this.dataSource.data = response;
       this.dataSource.paginator = this.paginator;
+      this.paginator.pageSize = 25;
+      this.paginator.firstPage();
       this.isLoading = false;
     },
       error => {
