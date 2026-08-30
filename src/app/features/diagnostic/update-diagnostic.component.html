@@ -55,12 +55,18 @@
             <label class="app-dialog__label" for="udg-imagen">Imagen del fondo de ojo</label>
             <input id="udg-imagen" type="file" class="app-dialog__file" accept="image/*"
                 (change)="handleImageChange($event)">
-            <span class="app-dialog__hint">Déjala vacía para conservar la imagen y el resultado actuales.</span>
+            <span class="app-dialog__hint">Por favor cargue nuevamente una imagen.</span>
         </div>
     </form>
 </mat-dialog-content>
 
 <mat-dialog-actions class="app-dialog__footer">
-    <button type="button" class="app-dialog__btn app-dialog__btn--outline" (click)="onNoClick()">Cancelar</button>
-    <button type="button" class="app-dialog__btn app-dialog__btn--primary" (click)="onSave()" [disabled]="diagnosticoForm.invalid">Guardar</button>
+    <button type="button" class="app-dialog__btn app-dialog__btn--outline" (click)="onNoClick()" [disabled]="isProcessing">Cancelar</button>
+    <button type="button" class="app-dialog__btn app-dialog__btn--primary" (click)="onSave()" [disabled]="diagnosticoForm.invalid || isProcessing">
+        <span *ngIf="!isProcessing">Guardar</span>
+        <span *ngIf="isProcessing" style="display:inline-flex;align-items:center;gap:8px;">
+            <mat-spinner diameter="18"></mat-spinner>
+            Guardando...
+        </span>
+    </button>
 </mat-dialog-actions>

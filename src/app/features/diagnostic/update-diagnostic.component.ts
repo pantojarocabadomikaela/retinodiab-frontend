@@ -40,6 +40,7 @@ export class UpdateDiagnosticComponent implements OnInit, OnDestroy {
   usuarios: Usuario[] = [];
   pacientesFiltrados: Usuario[] = [];
   isLoadingUsers = true;
+  isProcessing = false;
 
   @ViewChild(MatAutocompleteTrigger) autoTrigger!: MatAutocompleteTrigger;
   @ViewChild('pacienteInput') pacienteInput!: ElementRef<HTMLInputElement>;
@@ -47,7 +48,9 @@ export class UpdateDiagnosticComponent implements OnInit, OnDestroy {
   private selectedFile: File | null = null;
   private suscripcionUsers: Subscription;
   private suscripcion: Subscription;
+  private suscripcionEliminar: Subscription;
   private apiUrl = '';
+  private apiUrlUpdate = '';
 
   constructor(
     private http: HttpClient,
@@ -59,7 +62,9 @@ export class UpdateDiagnosticComponent implements OnInit, OnDestroy {
   ) {
     this.suscripcionUsers = new Subscription();
     this.suscripcion = new Subscription();
-    this.apiUrl = this.api.url('/diagnosticos/');
+    this.suscripcionEliminar = new Subscription();
+    this.apiUrl = this.api.url('/diagnosticos');
+    this.apiUrlUpdate = this.api.url('/validate-image/');
   }
 
   ngOnInit(): void {
@@ -123,9 +128,13 @@ export class UpdateDiagnosticComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.suscripcionUsers.unsubscribe();
     this.suscripcion.unsubscribe();
+    this.suscripcionEliminar.unsubscribe();
   }
 
   onNoClick(): void {
+    if (this.isProcessing) {
+      return;
+    }
     this.dialogRef.close();
   }
 
@@ -135,6 +144,10 @@ export class UpdateDiagnosticComponent implements OnInit, OnDestroy {
   }
 
   onSave(): void {
+    if (this.isProcessing) {
+      return;
+    }
+
     if (this.diagnosticoForm.invalid) {
       this.diagnosticoForm.markAllAsTouched();
       return;
@@ -154,13 +167,30 @@ export class UpdateDiagnosticComponent implements OnInit, OnDestroy {
       formData.append('imageFile', this.selectedFile);
     }
 
-    this.suscripcion = this.http.put<any>(this.apiUrl + this.data.id + '/', formData).subscribe(
+    this.isProcessing = true;
+    this.suscripcion = this.http.post<any>(this.apiUrlUpdate, formData).subscribe(
       response => {
-        this.snackBarService.openSnackBar('Diagnóstico actualizado exitosamente', () => {}, SnackBarType.success);
-        this.dialogRef.close(true);
+        this.snackBarService.openSnackBar(response.mensaje ?? 'Diagnóstico guardado', () => {}, SnackBarType.success);
+
+        this.suscripcionEliminar = this.doEliminar(this.data.id).subscribe(
+          () => {
+            this.isProcessing = false;
+            this.dialogRef.close(true);
+          },
+          error => {
+            this.isProcessing = false;
+            this.snackBarService.openSnackBar('Error al eliminar diagnóstico', () => {}, SnackBarType.error);
+          }
+        );
       },
       error => {
-        this.snackBarService.openSnackBar('Error al actualizar diagnóstico: ' + (error?.error?.mensaje ?? error), () => {}, SnackBarType.error);
-      });
+        this.isProcessing = false;
+        this.snackBarService.openSnackBar('Error al crear diagnóstico: ' + (error?.error?.mensaje ?? error), () => {}, SnackBarType.error);
+      }
+    );
+  }
+
+  doEliminar(id: any) {
+    return this.http.delete<any>(this.apiUrl + '/' + id + '/');
   }
 }
